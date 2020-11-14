@@ -6,6 +6,7 @@ import {
   Image,
   Picker,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -59,61 +60,81 @@ const data = [
       body: "2020-10-10 - 2020-10-16",
     },
   },
+  {
+    id: "6",
+    status: "Open",
+    bckColor: "blue",
+    info: {
+      head: "FACEBOOK",
+      body: "2020-08-08 - 2020-08-14",
+    },
+  },
+  {
+    id: "7",
+    status: "Open",
+    bckColor: "blue",
+    info: {
+      head: "FACEBOOK",
+      body: "2020-08-08 - 2020-08-14",
+    },
+  },
 ];
 
 const SecondPage = () => {
   const [status, setStatus] = useState("");
   return (
     <View style={styles.container}>
-      <View style={styles.top}></View>
-      <View style={styles.profCont}>
-        <Image source={require("./sup1.jpg")} style={styles.prof} />
-        <Text>Welcome Ravi</Text>
-      </View>
-      <View style={styles.dummy}></View>
-      <View style={styles.mid}>
-        <View style={styles.pickCont}>
-          <Picker
-            selectedValue={status}
-            style={styles.pick}
-            onValueChange={(itemValue, itemIndex) => setStatus(itemValue)}
-          >
-            <Picker.Item label="Status" value="status" />
-            <Picker.Item label="Open" value="open" />
-            <Picker.Item label="Approved" value="approved" />
-            <Picker.Item label="Rejected" value="rejected" />
-            <Picker.Item label="Submitted" value="submitted" />
-          </Picker>
+      <ScrollView style={{ flex: 1, width: "100%" }}>
+        <View style={styles.top}></View>
+        <View style={styles.profCont}>
+          <Image source={require("./sup1.jpg")} style={styles.prof} />
+          <Text>Welcome Ravi</Text>
         </View>
-        <TouchableOpacity>
-          <View style={styles.crtCont}>
-            <Text style={{ color: "white" }}>Create</Text>
-            <View style={styles.iconPlus}>
-              <AntDesign name="plus" size={18} color="black" />
-            </View>
+        <View style={styles.dummy}></View>
+        <View style={styles.mid}>
+          <View style={styles.pickCont}>
+            <Picker
+              selectedValue={status}
+              style={styles.pick}
+              onValueChange={(itemValue, itemIndex) => setStatus(itemValue)}
+            >
+              <Picker.Item label="Status" value="status" />
+              <Picker.Item label="Open" value="open" />
+              <Picker.Item label="Approved" value="approved" />
+              <Picker.Item label="Rejected" value="rejected" />
+              <Picker.Item label="Submitted" value="submitted" />
+            </Picker>
           </View>
-        </TouchableOpacity>
-      </View>
-      {data.map((val) => {
-        return (
-          <View style={styles.card} key={val.id}>
-            <View style={[styles.textCon, { backgroundColor: val.bckColor }]}>
-              <Text style={styles.textVer}>{val.status}</Text>
+          <TouchableOpacity>
+            <View style={styles.crtCont}>
+              <Text style={{ color: "white" }}>Create</Text>
+              <View style={styles.iconPlus}>
+                <AntDesign name="plus" size={18} color="black" />
+              </View>
             </View>
-            <View style={styles.infoin}>
-              <Text>{val.info.head}</Text>
-              <Text>{val.info.body}</Text>
+          </TouchableOpacity>
+        </View>
+        {data.map((val) => {
+          return (
+            <View style={styles.card} key={val.id}>
+              <View style={[styles.textCon, { backgroundColor: val.bckColor }]}>
+                <Text style={styles.textVer}>{val.status}</Text>
+              </View>
+              <View style={styles.infoin}>
+                <Text>{val.info.head}</Text>
+                <Text>{val.info.body}</Text>
+              </View>
+              <TouchableOpacity style={{ paddingRight: 10 }}>
+                <MaterialCommunityIcons
+                  name="greater-than"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{ paddingRight: 10 }}>
-              <MaterialCommunityIcons
-                name="greater-than"
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-          </View>
-        );
-      })}
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
@@ -136,6 +157,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 70,
     display: "flex",
+    alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
   },
